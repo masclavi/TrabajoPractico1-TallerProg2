@@ -18,7 +18,7 @@ body {
     padding: 20px;
 }
 
-/* Header */
+/* Encabezado */
 header {
     text-align: center;
     background: rgba(255, 255, 255, 0.95);
@@ -141,7 +141,7 @@ header p {
     font-size: 14px;
 }
 
-/* Controles */
+/* Controles (botones de carga/eliminar) */
 .controls {
     text-align: center;
     margin-bottom: 30px;
@@ -167,7 +167,7 @@ header p {
     font-size: 1.8em;
 }
 
-/* Grid de conceptos */
+/* Grid de conceptos (estructura en columnas) */
 .conceptos-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -175,7 +175,7 @@ header p {
     margin-top: 20px;
 }
 
-/* Tarjetas de conceptos */
+/* Tarjetas de conceptos individules*/
 .concepto-card {
     background: #f7fafc;
     border: 2px solid #e2e8f0;
@@ -217,7 +217,7 @@ header p {
     justify-content: flex-end;
 }
 
-/* Mensajes */
+/* Mensajes de estado (éxito, error, info)*/
 .mensaje {
     padding: 15px;
     border-radius: 8px;
@@ -244,7 +244,7 @@ header p {
     border: 1px solid #90cdf4;
 }
 
-/* Estado vacío */
+/* Estado vacío (cuando no hay conceptos)*/
 .empty-state {
     text-align: center;
     padding: 40px;
@@ -256,7 +256,7 @@ header p {
     font-size: 1.5em;
 }
 
-/* Responsive */
+/* Responsive (pantallas chicas) */
 @media (max-width: 768px) {
     .container {
         padding: 15px;
@@ -298,7 +298,7 @@ header p {
     animation: fadeIn 0.5s ease-out;
 }
 
-/* Loading */
+/* Estilo para "cargando..." */
 .loading {
     text-align: center;
     padding: 20px;
@@ -310,6 +310,7 @@ header p {
     animation: dots 1.5s steps(4, end) infinite;
 }
 
+/* Animación de puntos suspensivos */
 @keyframes dots {
     0%, 20% {
         color: rgba(0,0,0,0);

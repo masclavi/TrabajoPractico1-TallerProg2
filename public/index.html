@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Conceptos</title>
+    <!-- Vinculamos el archivo CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
+        <!-- Encabezado de la página -->
         <header>
-            <h1>📚 Gestión de Conceptos</h1>
+            <h1>Gestión de Conceptos</h1>
             <p>Aplicación para guardar y consultar conceptos de la materia</p>
         </header>
 
@@ -17,36 +19,39 @@
         <section class="form-section">
             <h2>Agregar Nuevo Concepto</h2>
             <form id="conceptoForm">
+                <!-- Campo para el nombre del concepto -->
                 <div class="form-group">
                     <label for="nombre">Nombre del Concepto:</label>
                     <input type="text" id="nombre" name="nombre" required placeholder="Ej: Node.js">
                 </div>
                 
+                <!-- Campo para la definición del concepto -->
                 <div class="form-group">
                     <label for="definicion">Definición/Desarrollo:</label>
                     <textarea id="definicion" name="definicion" required placeholder="Describe el concepto aquí..."></textarea>
                 </div>
                 
+                <!-- Botón para enviar el formulario -->
                 <button type="submit" class="btn btn-primary">Agregar Concepto</button>
             </form>
         </section>
 
-        <!-- Controles -->
+        <!-- Sección de botones de control -->
         <section class="controls">
-            <button id="btnCargar" class="btn btn-secondary">🔄 Cargar Conceptos</button>
-            <button id="btnEliminarTodos" class="btn btn-danger">🗑️ Eliminar Todos</button>
+            <button id="btnCargar" class="btn btn-secondary">Cargar Conceptos</button>
+            <button id="btnEliminarTodos" class="btn btn-danger">Eliminar Todos</button>
         </section>
 
-        <!-- Lista de conceptos -->
+        <!-- Sección donde se mostrarán los conceptos -->
         <section class="conceptos-section">
             <h2>Lista de Conceptos</h2>
             <div id="mensaje" class="mensaje" style="display: none;"></div>
             <div id="listaConceptos" class="conceptos-grid">
-                <!-- Los conceptos se cargarán aquí dinámicamente -->
             </div>
         </section>
     </div>
 
+    <!-- Vinculamos el archivo JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>

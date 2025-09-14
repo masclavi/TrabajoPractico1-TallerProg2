@@ -4,11 +4,11 @@ const fs = require('fs');
 const path = require('path');
 const url = require('url');
 
-// Array para almacenar los conceptos
+// Array para almacenar los conceptos en memoria
 let conceptos = [];
-let nextId = 1;
+let nextId = 1; // contador para asignar IDs
 
-// Función para servir archivos estáticos
+// Función para servir archivos estáticos (HTML, CSS, JS)
 function serveStaticFile(res, filePath, contentType) {
     fs.readFile(filePath, (err, data) => {
         if (err) {
@@ -21,7 +21,7 @@ function serveStaticFile(res, filePath, contentType) {
     });
 }
 
-// Función para parsear el cuerpo de la petición
+//Función para leer y parsear el body (JSON)
 function parseBody(req, callback) {
     let body = '';
     req.on('data', chunk => {
@@ -55,7 +55,7 @@ const server = http.createServer((req, res) => {
         return;
     }
 
-    // Servir archivos estáticos
+    // Rutas de archivos estáticos
     if (method === 'GET' && pathname === '/') {
         serveStaticFile(res, path.join(__dirname, 'public', 'index.html'), 'text/html');
         return;
@@ -143,12 +143,12 @@ const server = http.createServer((req, res) => {
         }
     }
 
-    // 404 para rutas no encontradas
+    // Si no existe la ruta : devolver 404
     res.writeHead(404, { 'Content-Type': 'text/plain' });
     res.end('Página no encontrada');
 });
 
-// Iniciar servidor
+// Iniciar servidor en puerto 3000
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
     console.log(`Servidor ejecutándose en http://localhost:${PORT}`);

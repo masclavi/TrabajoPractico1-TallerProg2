@@ -1,6 +1,6 @@
-// Manipulación del DOM y comunicación con la API
+// Esperar a que el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
-    // Referencias a elementos del DOM
+    // --- Referencias a elementos del DOM ---
     const form = document.getElementById('conceptoForm');
     const nombreInput = document.getElementById('nombre');
     const definicionInput = document.getElementById('definicion');
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // URL base de la API
     const API_BASE = '/api/conceptos';
 
-    // Función para mostrar mensajes al usuario
+    // --- Función para mostrar mensajes en pantalla ---
     function mostrarMensaje(texto, tipo = 'info') {
         mensaje.style.display = 'block';
         mensaje.textContent = texto;
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 5000);
     }
 
-    // Función para realizar peticiones HTTP
+    // --- Función genérica para hacer peticiones HTTP ---
     async function hacerPeticion(url, options = {}) {
         try {
             const response = await fetch(url, {
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Función para cargar y mostrar todos los conceptos
+    // --- Función para cargar y mostrar todos los conceptos ---
     async function cargarConceptos() {
         try {
             mostrarMensaje('Cargando conceptos...', 'info');
@@ -61,15 +61,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Función para mostrar los conceptos en el DOM
+    // --- Función que muestra los conceptos en la página ---
     function mostrarConceptos(conceptos) {
         // Limpiar la lista actual
         listaConceptos.innerHTML = '';
 
+        // Si no hay conceptos, mostrar estado vacío
         if (conceptos.length === 0) {
             listaConceptos.innerHTML = `
                 <div class="empty-state">
-                    <h3>📝 No hay conceptos guardados</h3>
+                    <h3>No hay conceptos guardados</h3>
                     <p>Utiliza el formulario de arriba para agregar tu primer concepto</p>
                 </div>
             `;
@@ -83,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Función para crear una tarjeta de concepto
+    // --- Función que crea una tarjeta visual de un concepto ---
     function crearTarjetaConcepto(concepto) {
         const card = document.createElement('div');
         card.className = 'concepto-card';
@@ -98,6 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
             minute: '2-digit'
         });
 
+        // Estructura de la tarjeta
         card.innerHTML = `
             <h3>${escapeHtml(concepto.nombre)}</h3>
             <p>${escapeHtml(concepto.definicion)}</p>
@@ -106,10 +108,10 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
             <div class="concepto-actions">
                 <button class="btn btn-secondary btn-small" onclick="obtenerConcepto(${concepto.id})">
-                    👁️ Ver Detalles
+                    Ver Detalles
                 </button>
                 <button class="btn btn-danger btn-small" onclick="eliminarConcepto(${concepto.id})">
-                    🗑️ Eliminar
+                    Eliminar
                 </button>
             </div>
         `;
@@ -151,12 +153,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Función para obtener un concepto específico (GET/id)
+    // --- Función para obtener un concepto específico ---
     window.obtenerConcepto = async function(id) {
         try {
             const concepto = await hacerPeticion(`${API_BASE}/${id}`);
             
-            // Mostrar detalles en un alert (puedes mejorarlo con un modal)
+            // Mostrar detalles en un alert 
             alert(`DETALLES DEL CONCEPTO\n\nID: ${concepto.id}\nNombre: ${concepto.nombre}\nDefinición: ${concepto.definicion}\nFecha: ${new Date(concepto.fecha).toLocaleString('es-ES')}`);
             
             mostrarMensaje(`Concepto "${concepto.nombre}" consultado`, 'info');
@@ -166,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // Función para eliminar un concepto específico (DELETE/id)
+    // --- Función para eliminar un concepto específico ---
     window.eliminarConcepto = async function(id) {
         if (!confirm('¿Estás seguro de que quieres eliminar este concepto?')) {
             return;
@@ -188,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // Función para eliminar todos los conceptos (DELETE)
+    // --- Función para eliminar TODOS los conceptos ---
     async function eliminarTodosConceptos() {
         if (!confirm('¿Estás seguro de que quieres eliminar TODOS los conceptos? Esta acción no se puede deshacer.')) {
             return;
@@ -201,10 +203,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
             mostrarMensaje('Todos los conceptos fueron eliminados', 'success');
             
-            // Limpiar la lista en el DOM
+            // Mostrar lista vacía
             listaConceptos.innerHTML = `
                 <div class="empty-state">
-                    <h3>📝 No hay conceptos guardados</h3>
+                    <h3>No hay conceptos guardados</h3>
                     <p>Utiliza el formulario de arriba para agregar tu primer concepto</p>
                 </div>
             `;
@@ -215,16 +217,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Event Listeners
+   // --- Event Listeners ---
     
-    // Manejar envío del formulario
+    // Cuando se envía el formulario
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         
         const nombre = nombreInput.value.trim();
         const definicion = definicionInput.value.trim();
 
-        // Validación básica
+        // Validaciones básicas
         if (!nombre || !definicion) {
             mostrarMensaje('Por favor completa todos los campos', 'error');
             return;
@@ -240,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Agregar concepto
+        // Agregar concepto si todo está bien
         agregarConcepto(nombre, definicion);
     });
 
